@@ -9,7 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Colorful.Console" Version="1.2.10"/>
         <PackageReference Include="CommandLineParser" Version="2.8.0"/>
     </ItemGroup>
 
