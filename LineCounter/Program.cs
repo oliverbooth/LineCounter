@@ -16,21 +16,21 @@ static async Task CountLinesAsync(Options options)
     if (options.Verbose)
     {
         Console.WriteLine("Ignoring directories:");
-        foreach (var ignore in options.Ignore.Select(Path.GetFullPath))
+        foreach (string ignore in options.Ignore.Select(Path.GetFullPath))
         {
             Console.WriteLine($"- {ignore}");
         }
     }
 
     var regex = new Regex(options.Pattern, RegexOptions.Compiled);
-    var path = Path.GetFullPath(options.Path);
+    string path = Path.GetFullPath(options.Path);
     var searchOption = options.Recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-    var files = Directory.GetFiles(path, "*", searchOption);
+    string[] files = Directory.GetFiles(path, "*", searchOption);
     var count = 0;
 
-    foreach (var file in files)
+    foreach (string file in files)
     {
-        var directory = Path.GetDirectoryName(file);
+        string directory = Path.GetDirectoryName(file);
         if (directory is null)
         {
             if (options.Verbose)
@@ -76,7 +76,7 @@ static async Task CountLinesAsync(Options options)
             lines = lines.Where(line => line.Trim().Length > 0 && options.IgnoreChars.IndexOf(line.Trim()[0]) != 0);
         }
 
-        var fileCount = lines.Count();
+        int fileCount = lines.Count();
         if (options.Verbose)
         {
             var formatter = new[] {new Formatter(fileCount, Color.Cyan), new Formatter(file, Color.LightGray)};
