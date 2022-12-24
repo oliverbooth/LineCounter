@@ -5,6 +5,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <AssemblyName>lc</AssemblyName>
         <Authors>Oliver Booth</Authors>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
