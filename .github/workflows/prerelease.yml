@@ -28,19 +28,22 @@ jobs:
       - name: Publish Linux release
         run: |
           dotnet publish -o out -r linux-x64 -c Release -p:VersionSuffix='prerelease' -p:BuildNumber=${{ github.run_number }} --self-contained
-          zip ./lc-linux-x64.zip ./out/lc
+          cd out
+          zip ../lc-linux-x64.zip ./lc
           rm ./out/lc
       
       - name: Publish MacOS release
         run: |
           dotnet publish -o out -r osx-x64 -c Release -p:VersionSuffix='prerelease' -p:BuildNumber=${{ github.run_number }} --self-contained
-          zip ./lc-macos-x64.zip ./out/lc
+          cd out
+          zip ../lc-macos-x64.zip ./lc
           rm ./out/lc
 
       - name: Publish Windows release
         run: |
           dotnet publish -o out -r win-x64 -c Release -p:VersionSuffix='prerelease' -p:BuildNumber=${{ github.run_number }} --self-contained
-          zip ./lc-win-x64.zip ./out/lc.exe
+          cd out
+          zip ../lc-win-x64.zip ./lc.exe
           rm ./out/lc.exe
 
       - name: Create Release
