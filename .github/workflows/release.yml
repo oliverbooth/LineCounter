@@ -30,6 +30,7 @@ jobs:
           dotnet publish -o out -r linux-x64 -c Release --self-contained
           cd out
           zip ../lc-linux-x64.zip ./lc
+          cd ..
           rm ./out/lc
 
       - name: Publish MacOS release
@@ -37,6 +38,7 @@ jobs:
           dotnet publish -o out -r osx-x64 -c Release --self-contained
           cd out
           zip ../lc-macos-x64.zip ./lc
+          cd ..
           rm ./out/lc
 
       - name: Publish Windows release
@@ -44,6 +46,7 @@ jobs:
           dotnet publish -o out -r win-x64 -c Release --self-contained
           cd out
           zip ../lc-win-x64.zip ./lc.exe
+          cd ..
           rm ./out/lc.exe
 
       - name: Create Release
