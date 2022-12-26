@@ -1,0 +1,54 @@
+name: Tagged Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  release:
+    name: "Tagged Release"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Add GitHub NuGet source
+        run: dotnet nuget add source --username oliverbooth --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/oliverbooth/index.json"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Publish Linux release
+        run: |
+          dotnet publish -o out -r linux-x64 -c Release --self-contained
+          zip ./lc-linux-x64.zip ./out/lc
+          rm ./out/lc
+
+      - name: Publish MacOS release
+        run: |
+          dotnet publish -o out -r osx-x64 -c Release --self-contained
+          zip ./lc-macos-x64.zip ./out/lc
+          rm ./out/lc
+
+      - name: Publish Windows release
+        run: |
+          dotnet publish -o out -r win-x64 -c Release --self-contained
+          zip ./lc-win-x64.zip ./out/lc.exe
+          rm ./out/lc.exe
+
+      - name: Create Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            lc-linux-x64.zip
+            lc-macos-x64.zip
+            lc-win-x64.zip
