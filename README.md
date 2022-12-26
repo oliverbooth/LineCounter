@@ -1,5 +1,5 @@
 # 💻 LineCounter
-[<img src="https://img.shields.io/github/actions/workflow/status/oliverbooth/LineCounter/dotnet-core.yml">](https://github.com/oliverbooth/LineCounter/actions?query=workflow%3A%22.NET+Core%22)
+[<img src="https://img.shields.io/github/actions/workflow/status/oliverbooth/LineCounter/dotnet.yml">](https://github.com/oliverbooth/LineCounter/actions/workflows/dotnet.yml?query=workflow%3A%22.NET+Core%22)
 [<img src="https://img.shields.io/github/downloads/oliverbooth/LineCounter/total">](https://github.com/oliverbooth/LineCounter/releases)
 
 LineCounter (`lc`) is a command-line utility for counting lines in files.
